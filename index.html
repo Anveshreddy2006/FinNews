@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="NewsPulse is a modern vanilla JavaScript news app with search, categories, bookmarks, dark mode, and infinite scroll."
+    />
+    <title>NewsPulse | Modern News Web App</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Source+Serif+4:wght@600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="page-shell">
+      <div class="ambient ambient-one"></div>
+      <div class="ambient ambient-two"></div>
+
+      <header class="site-header">
+        <nav class="navbar container" aria-label="Primary navigation">
+          <a class="brand" href="#" aria-label="NewsPulse home">
+            <span class="brand-mark">NP</span>
+            <span>
+              <strong>NewsPulse</strong>
+              <small>Live headlines, reimagined</small>
+            </span>
+          </a>
+
+          <form class="search-form" id="searchForm" role="search">
+            <label class="sr-only" for="searchInput">Search news</label>
+            <input
+              id="searchInput"
+              type="search"
+              placeholder="Search markets, AI, health, sports..."
+              autocomplete="off"
+            />
+            <button type="submit" class="search-btn">Search</button>
+          </form>
+
+          <button
+            class="theme-toggle"
+            id="themeToggle"
+            type="button"
+            aria-label="Toggle dark mode"
+            aria-pressed="false"
+          >
+            <span class="theme-toggle__icon">Moon</span>
+          </button>
+        </nav>
+      </header>
+
+      <main class="container">
+        <section class="hero">
+          <div class="hero-copy">
+            <p class="eyebrow">Real-time news dashboard</p>
+            <h1>Stay ahead with a fast, focused, portfolio-grade news experience.</h1>
+            <p class="hero-text">
+              Browse top headlines, filter by category, search instantly, save
+              stories, and switch themes without ever leaving the page.
+            </p>
+
+            <div class="hero-meta">
+              <div>
+                <span class="hero-stat" id="headlineCount">0</span>
+                <span class="hero-label">articles loaded</span>
+              </div>
+              <div>
+                <span class="hero-stat" id="bookmarkCount">0</span>
+                <span class="hero-label">bookmarks saved</span>
+              </div>
+            </div>
+          </div>
+
+          <aside class="hero-panel">
+            <p class="hero-panel__label">Today in focus</p>
+            <h2 id="featuredTitle">Connect your API key to start reading the latest headlines.</h2>
+            <p id="featuredDescription">
+              Add your GNews API key in <code>config.js</code> and NewsPulse
+              will stream top stories here in real time.
+            </p>
+          </aside>
+        </section>
+
+        <section class="controls">
+          <div class="categories" id="categoryTabs" aria-label="News categories">
+            <button class="category-chip active" data-category="general" type="button">Top</button>
+            <button class="category-chip" data-category="technology" type="button">Tech</button>
+            <button class="category-chip" data-category="business" type="button">Business</button>
+            <button class="category-chip" data-category="sports" type="button">Sports</button>
+            <button class="category-chip" data-category="health" type="button">Health</button>
+            <button class="category-chip" data-category="entertainment" type="button">Entertainment</button>
+            <button class="category-chip" data-category="science" type="button">Science</button>
+          </div>
+
+          <div class="status-bar">
+            <div>
+              <p class="status-label" id="feedLabel">Top headlines</p>
+              <p class="status-subtext" id="feedSubtext">
+                Fresh coverage from trusted sources around the world.
+              </p>
+            </div>
+            <button class="bookmark-toggle" id="bookmarkToggle" type="button">
+              View bookmarks
+            </button>
+          </div>
+        </section>
+
+        <div class="app-layout">
+          <section class="news-section">
+            <div id="feedbackMessage" class="feedback-message hidden" role="status"></div>
+
+            <div id="newsGrid" class="news-grid" aria-live="polite"></div>
+
+            <div id="skeletonGrid" class="news-grid hidden" aria-hidden="true"></div>
+
+            <div id="loader" class="loader hidden" aria-live="assertive">
+              <span class="spinner"></span>
+              <span>Loading more stories...</span>
+            </div>
+
+            <div id="emptyState" class="empty-state hidden">
+              <h3>No stories found</h3>
+              <p>Try a different keyword or switch back to a headline category.</p>
+            </div>
+
+            <div id="scrollSentinel" aria-hidden="true"></div>
+          </section>
+
+          <aside class="bookmarks-panel" id="bookmarksPanel">
+            <div class="bookmarks-panel__header">
+              <div>
+                <p class="eyebrow">Saved reading list</p>
+                <h2>Bookmarks</h2>
+              </div>
+              <button class="text-btn" id="clearBookmarksBtn" type="button">
+                Clear all
+              </button>
+            </div>
+
+            <div id="bookmarkList" class="bookmark-list"></div>
+          </aside>
+        </div>
+      </main>
+    </div>
+
+    <script src="config.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>
